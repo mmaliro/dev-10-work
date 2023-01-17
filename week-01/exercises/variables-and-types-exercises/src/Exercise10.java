@@ -9,5 +9,10 @@ public class Exercise10 {
         // 2. Store the value in a new variable.
         // 3. Print the result.
         // Expected value: 219.1875.
+
+        float kmTraveled = 125.25f * 1.75f;
+        float result = kmTraveled;
+
+        System.out.println(result);
     }
 }
