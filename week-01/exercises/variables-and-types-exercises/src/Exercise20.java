@@ -12,5 +12,14 @@ public class Exercise20 {
         // 2. Print it.
         // 3. Print the 20th character.
         // 4. Print the 68th character.
+
+        char firstChar = aliceQuote.charAt(0);
+        System.out.println(firstChar);
+
+        char twentyChar = aliceQuote.charAt(19);
+        System.out.println(twentyChar);
+
+        char sixtyEight = aliceQuote.charAt(67);
+        System.out.println(sixtyEight);
     }
 }

@@ -3,7 +3,7 @@ public class Exercise13 {
     public static void main(String[] args) {
 
         int purchaseQuantity = 7;
-        boolean hasCoupon = false;
+        boolean hasCoupon = true;
 
         boolean hasDiscount = purchaseQuantity >= 6 || hasCoupon;
 
