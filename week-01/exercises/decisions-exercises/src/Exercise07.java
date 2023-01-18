@@ -30,5 +30,13 @@ public class Exercise07 {
         // Hours of homework: 20
         // Day of week: Sunday
         // Time to do the homework...
+
+        if ((hoursOfHomework < 15) && dayOfWeek.startsWith("s")) {
+            System.out.println("Hours of homework: " + hoursOfHomework + "\n" + "Day of week: " + dayOfWeek + "\n" + "I'm taking the day off! ");
+        }
+
+        if (hoursOfHomework > 15 || !dayOfWeek.startsWith("s")) {
+            System.out.println("Hours of homework: " + hoursOfHomework + "\n" + "Day of week: " + dayOfWeek + "\n" + "Time to do the homework... ");
+        }
     }
 }

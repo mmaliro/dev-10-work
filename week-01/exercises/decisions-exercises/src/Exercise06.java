@@ -20,5 +20,17 @@ public class Exercise06 {
         int shopperCount = Integer.parseInt(console.nextLine());
 
         // 1. Apply if/else here.
+
+        if (snorkelerCount % 2 == 0) {
+            System.out.println("We have a total of " + snorkelerCount + " snorkelers and " + shopperCount + " shoppers. ");
+        }
+
+        int sum = snorkelerCount + shopperCount;
+
+        if (snorkelerCount % 2 == 1)
+        {
+            System.out.println("We have a total of 0 snorkelers and " + sum + " shoppers. ");
+
+        }
     }
 }

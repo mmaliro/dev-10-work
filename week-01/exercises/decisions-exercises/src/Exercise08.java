@@ -13,11 +13,25 @@ public class Exercise08 {
         // 1. Add at least two more opposites by adding `else if` clauses.
         if (word.equalsIgnoreCase("high")) {
             opposite = "low";
-        } else if (word.equalsIgnoreCase("cold")) {
-            opposite = "hot";
-        } else if (word.equalsIgnoreCase("little")) {
-            opposite = "big";
         }
+
+        else if (word.equalsIgnoreCase("cold"))
+        {
+            opposite = "hot";}
+
+        else if (word.equalsIgnoreCase("little"))
+        {
+            opposite = "big";}
+
+        else if (word.equalsIgnoreCase("short")) {
+            opposite = "tall";}
+
+        else if (word.equalsIgnoreCase("bald")) {
+            opposite = "hairy";
+
+
+
+    }
 
         if (opposite == null) {
             System.out.printf("I don't have an opposite for %s.%n", word);
