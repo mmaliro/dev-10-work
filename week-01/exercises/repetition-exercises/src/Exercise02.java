@@ -11,5 +11,11 @@ public class Exercise02 {
         // 8
         // 10
         // 12
+
+        int even = 2;
+        while (even < 13) {
+            System.out.println(even);
+            even += 2;
+        }
     }
 }

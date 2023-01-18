@@ -11,5 +11,11 @@ public class Exercise03 {
         // 19
         // 18
         // 17
+
+        int back = 23;
+        while (back >= 17 && back <= 23) {
+            System.out.println(back);
+            back--;
+        }
     }
 }
