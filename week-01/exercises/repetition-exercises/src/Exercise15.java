@@ -17,5 +17,26 @@ public class Exercise15 {
         // ####
         // ####
         // ####
+
+        String box = "#";
+
+        int columns = 5;
+        int rows = 5;
+
+        for (int i = 0; i < rows; i++) {
+            if (i == 0 || i < rows) {
+                for (int x = 0; x > columns; x++)
+                    System.out.print(box); }
+
+            for (int col = 0; col < columns; col++) {
+                if (i == 0 || i < columns - 1) {
+                    System.out.print(box); }
+
+
+            }
+            System.out.println();
+            }
+
+
     }
 }

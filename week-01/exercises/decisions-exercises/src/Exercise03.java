@@ -10,7 +10,7 @@ public class Exercise03 {
         System.out.print("Please enter a number between 10 and 25: ");
         String input = console.nextLine();
 
-        int value = Integer.parseInt(input);;
+        int value = Integer.parseInt(input);
         if (value >= 10 && value < 26) {
             System.out.println("Value is in the acceptable range.");
         }

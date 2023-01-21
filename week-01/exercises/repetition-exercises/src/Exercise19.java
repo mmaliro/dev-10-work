@@ -24,5 +24,20 @@ public class Exercise19 {
         // "B", "igstar" -> "Bigstar"
         // "", "huh?" -> "huh?"
         // "wha?", "" -> "wha?"
+
+        String interleave = "";
+        int bigger = first.length();
+        if (second.length() > bigger)
+            bigger = second.length();
+        for (int x = 0; x < bigger; x++) {
+            if (x < first.length())
+                interleave = interleave + first.charAt(x);
+            if (x < second.length())
+                interleave = interleave + second.charAt(x);
+        }
+        System.out.println(interleave);
+
+
+
     }
 }

@@ -9,5 +9,17 @@ public class Exercise06 {
 
     public static void main(String[] args) {
         // 2. Call your method in various ways to test it here.
+        boolean result = isBetween(2, 2, 2);
+        System.out.println(result);
+
+        System.out.println(isBetween(5, 2, 3));
+        System.out.println(isBetween(10, 20, 13));
+        System.out.println(isBetween(25, 12, 30));
+
+    }
+
+    public static boolean isBetween(int low, int med, int high) {
+            return low < high && low > med;
+
     }
 }

@@ -22,5 +22,26 @@ public class Exercise16 {
         // (2X2)
         // **
         // **
+
+        String border = "*";
+        String inner = "#";
+
+        int columns = 5;
+        int rows = 5;
+
+        for (int i = 0; i < rows; i++) {
+            if (i == 0 || i == rows - 1) {
+                for (int x = 0; x < columns; x++)
+                    System.out.print("*");
+            } else {
+                for (int x = 0; x < columns; x++) {
+                    if (x == 0 || x == rows - 1)
+                        System.out.print("*");
+                    else
+                        System.out.print("#");
+                }
+            }
+            System.out.println("");
+        }
     }
 }

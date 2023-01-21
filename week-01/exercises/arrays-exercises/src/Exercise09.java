@@ -7,6 +7,17 @@ public class Exercise09 {
         // 1. Loop through the haystack and find the needle.
         // 2. Print the index where you found it.
         // Hint: this is an exercise about the default value of strings.
+
+        int indexOfNeedle = -1;
+
+        for(int i = 0; i < haystack.length; i++) {
+            if (haystack[i] != null) {
+                indexOfNeedle = i;
+                break;
+            }
+        }
+
+        System.out.println("Index of needle: " + indexOfNeedle);
     }
 
     public static String[] makeHaystack() {

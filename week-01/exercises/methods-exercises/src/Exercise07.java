@@ -9,5 +9,21 @@ public class Exercise07 {
 
     public static void main(String[] args) {
         // 2. Call your method in various ways to test it here.
+
+        boolean result = areInOrder(9, 10, 11, 20);
+        System.out.println(result);
+
+        System.out.println(areInOrder(5,2,10, 1));
+        System.out.println(areInOrder(9,19,15, 19));
+        System.out.println(areInOrder(15,25,30, 41));
     }
+
+
+    public static boolean areInOrder(int a, int b, int c, int d){
+        return (a < b && b < c && c < d);
+
+        }
+
 }
+
+

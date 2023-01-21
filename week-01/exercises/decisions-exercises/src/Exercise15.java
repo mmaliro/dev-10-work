@@ -12,5 +12,56 @@ public class Exercise15 {
         String opposite = null;
 
         // 1. Re-implement Exercise08 using a switch statement.
+
+        switch (word) {
+            case "high":
+                if (word.equalsIgnoreCase("high")) {
+                    opposite = "low";
+                    break;}
+
+
+        }
+
+        switch (word) {
+            case "cold":
+                if (word.equalsIgnoreCase("cold")) {
+                    opposite = "hot";
+                    break;}
+
+
+        }
+
+        switch (word) {
+            case "little":
+                if (word.equalsIgnoreCase("little"))
+                { opposite = "big";
+                    break;}
+
+
+        }
+
+        switch (word) {
+            case "short":
+                if (word.equalsIgnoreCase("short"))
+                { opposite = "tall";
+                    break;}
+
+
+        }
+
+        switch (word) {
+            case "bald":
+                if (word.equalsIgnoreCase("bald"))
+                { opposite = "hairy";
+                    break;}
+
+
+
+            default:
+                if (opposite == null) {
+                    System.out.println("I don't have an opposite for %s.%n" + word);
+                }
+                break;
+        }
     }
 }

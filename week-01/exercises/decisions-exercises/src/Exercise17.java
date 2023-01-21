@@ -12,6 +12,7 @@ public class Exercise17 {
         System.out.println("Day of the week [1-7]: ");
         int dayOfWeek = Integer.parseInt(console.nextLine());
 
+
         // 1. Re-implement Exercise07 using a switch statement.
         // Days 6 and 7 represent Saturday and Sunday.
         // If it's the weekend and Abdi has less than 15 hours of homework, he skips homework for the day.
@@ -20,5 +21,23 @@ public class Exercise17 {
         // You may choose to track data -- maybe a boolean for homework yes/no -- instead of printing a message in
         // each case. That's a lot of repeated typing.
         // Then print the detailed message after the switch.
+
+        switch (hoursOfHomework & dayOfWeek) {
+            case 1:
+                if (hoursOfHomework > 15 || dayOfWeek < 6) {
+                    System.out.println("Gotta study...");
+                }
+                break;
+
+
+            default:
+
+            if (hoursOfHomework < 15 && dayOfWeek >= 6) {
+                System.out.println("You're free! ");
+                break;
+            }
+        }
+
+
     }
 }

@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class Exercise10 {
@@ -21,5 +22,37 @@ public class Exercise10 {
         // If a lbs/zone combo does not exist, print a warning message for the user.
 
         Scanner console = new Scanner(System.in);
+        System.out.print("Enter your pounds >> ");
+        int pounds = console.nextInt();
+        System.out.print("Enter your zone >> ");
+        int zone = console.nextInt();
+
+        if(pounds == 1 && zone < 3){
+            System.out.println("The price is $7.50");
+        } else if (pounds == 1 && zone == 3) {
+            System.out.println("The price is $7.85");
+        } else if(pounds == 2 && zone < 3){
+            System.out.println("The price is $8.25");
+        } else if (pounds == 2 && zone == 3) {
+            System.out.println("The price is $8.70");
+        } else if (pounds == 3 && zone < 3) {
+            System.out.println("The price is $8.70");
+        } else if (pounds == 3 && zone == 3) {
+            System.out.println("The price is $9.70");
+        } else if (pounds == 4 && zone < 3) {
+            System.out.println("The price is $9.20");
+        } else if (pounds == 4 && zone == 3) {
+            System.out.println("The price is $10.55");
+        } else if (pounds == 5 && zone < 3) {
+            System.out.println("The price is $10.20");
+        } else if (pounds == 5 && zone == 3) {
+            System.out.println("The price is $11.30");
+        } else {
+            System.out.println("That combo does not exist.");
+        }
+
+
+
+
     }
 }
