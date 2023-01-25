@@ -10,5 +10,11 @@ public class Exercise01 {
         // 3. Instantiate two more musicians and assign them to new variables.
         // 4. Print the musicians' names to the console.
 
+        Musician cole = new Musician ("Keyshia Cole" , 10);
+        System.out.println(cole.getName());
+
+        Musician thomas = new Musician ("Joe Thomas" , 20);
+        System.out.println(thomas.getName());
+
     }
 }
