@@ -12,7 +12,7 @@ public class Hotel {
 
         int numCapsules = Integer.parseInt(console.nextLine());
         System.out.println("There are " + numCapsules + " unoccupied capsules ready to be booked.");
-        String[] capsules = new String[numCapsules + 1];
+        String[] capsules = new String[numCapsules];
 
 
         boolean run = true;
@@ -43,43 +43,48 @@ public class Hotel {
 
     private static void viewGuests(Scanner console, String[] capsules) {
         System.out.println("View guests from: ");
-        int guests = Integer.parseInt(console.nextLine());
+        int requestedView = Integer.parseInt(console.nextLine());
         int i;
 
+        if(requestedView <= capsules.length && requestedView > 0) {
+            if (capsules.length <= 11) {
+                for (i = 0; i < capsules.length; i++) {
+                    System.out.printf("Capsule #%s: %s%n", i + 1, capsules[i] == null ? "[unoccupied]" : capsules[i]);
+                }
 
-        if (guests > 11 && guests < capsules.length) {
-            for (i = guests - 5; i <= guests + 5; i++) {
-                System.out.printf("Capsule #%s: %s%n", i, capsules[i] == null ? "[unoccupied]" : capsules[i]);
+            } else if (requestedView <= 5) {
+                for (i = 0; i < 11; i++) {
+                    System.out.printf("Capsule #%s: %s%n", i + 1 , capsules[i] == null ? "[unoccupied]" : capsules[i]);
+                }
+            } else if (requestedView > capsules.length - 5) {
+                for (i = capsules.length - 11; i < capsules.length; i++) {
+                    System.out.printf("Capsule #%s: %s%n", i + 1, capsules[i] == null ? "[unoccupied]" : capsules[i]);
+                }
+
+            } else {
+                for (i = requestedView - 6; i <= requestedView + 4; i++) {
+                    System.out.printf("Capsule #%s: %s%n", i + 1, capsules[i] == null ? "[unoccupied]" : capsules[i]);
+                }
             }
+        }else{
+            System.out.println("No room for this number!");
         }
-            else if (capsules.length >= guests && capsules.length > 11 && guests > 11) {
-                for (i = guests - 10; i <= guests; i++) {
-                    System.out.printf("Capsule #%s: %s%n", i, capsules[i] == null ? "[unoccupied]" : capsules[i]);
-                }
 
 
 
-                } else if (guests < capsules.length && guests <= 11 && capsules.length > 11) {
-                for (i = guests; i < guests + 11; i++) {
-                    System.out.printf("Capsule #%s: %s%n", i, capsules[i] == null ? "[unoccupied]" : capsules[i]);
-                }
-
-
-            } else if (guests < 11 && capsules.length < 11)
-                for (i = guests; i < capsules.length; i++) {
-                    System.out.printf("Capsule #%s: %s%n", i, capsules[i] == null ? "[unoccupied]" : capsules[i]);
-                }
 
         }
+
+
 
 
     private static void handleCheckout(Scanner console, String[] capsules) {
-        System.out.printf("Guest Check Out #[1 - %s]:", capsules.length - 1);
+        System.out.printf("Guest Check Out #[1 - %s]:", capsules.length);
         int checkout = Integer.parseInt(console.nextLine());
 
 
-            if ((capsules[checkout]) != null) {
-                (capsules[checkout]) = null;
+            if ((capsules[checkout - 1]) != null) {
+                (capsules[checkout - 1]) = null;
                 System.out.println("Capsule " + checkout + " is now empty.");
 
             }
@@ -100,8 +105,8 @@ public class Hotel {
         System.out.println("Capsule #: ");
         int checkin = Integer.parseInt(console.nextLine());
 
-        if ((capsules[checkin]) == null) {
-            capsules[checkin] = name;
+        if ((capsules[checkin - 1]) == null) {
+            capsules[checkin - 1] = name;
             System.out.println(name + " is now booked in room " + checkin);
         } else {
             System.out.println("Error, room " + checkin + " is occupied.");
@@ -117,8 +122,6 @@ public class Hotel {
         String menuOption = (console.nextLine());
         return menuOption;
     }
-
-
 
 
 
