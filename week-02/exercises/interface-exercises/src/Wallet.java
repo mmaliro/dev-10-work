@@ -43,4 +43,16 @@ public class Wallet implements MoneyStorage {
         balance -= result;
         return result;
     }
+
+    @Override
+    public void setMoneyStorage(Wallet myWallet) {
+
+    }
+
+    @Override
+    public MoneyStorage getMoneyStorage() {
+        return null;
+    }
+
+
 }

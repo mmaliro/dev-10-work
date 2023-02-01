@@ -43,6 +43,12 @@ public class Exercise07 {
             input = console.nextLine();
         } while (!(input.length() == 1 && input.charAt(0) >= '1' && input.charAt(0) <= '4'));
 
+        return getMoneyStorage(input);
+    }
+
+        static MoneyStorage getMoneyStorage(String input) {
+
+
         // 1. Add a switch statement to handle options 1 - 4.
         // 2. For each option, create a method that returns a MoneyStorage of the appropriate type:
         // 1 == Wallet, 2 == Mortgage, 3 == Vault, 4 == Bank Account
@@ -53,8 +59,54 @@ public class Exercise07 {
         // - for Vault?
 
         // 3. Return the Wallet, Mortgage, Vault, or Bank Account instead of null.
-        return null;
+
+            MoneyStorage moneyStorage = null;
+
+            switch (input) {
+                case "1":
+                    moneyStorage = getWallet();
+                    break;
+                case "2":
+                    moneyStorage = getMortgage();
+                    break;
+                case "3":
+                    // TODO
+                    break;
+                case "4":
+                    // TODO
+                    break;
+            }
+
+            // 3. Return the Wallet, Mortgage, Vault, or Bank Account instead of null.
+            return moneyStorage;
+        }
+
+    static MoneyStorage getMortgage() {
+        double startingBalance = getStartingBalance();
+
+        System.out.print("Enter an account number: ");
+        String accountNumber = console.nextLine();
+
+        return new Mortgage(startingBalance, accountNumber);
     }
+
+    static MoneyStorage getWallet() {
+        double startingBalance = getStartingBalance();
+
+        System.out.print("Enter a description: ");
+        String description = console.nextLine();
+
+        return new Wallet(startingBalance, description);
+    }
+
+    static double getStartingBalance() {
+        System.out.print("Enter a starting balance: ");
+        // Assume that the user will give me a string that can be to a double.
+        return Double.parseDouble(console.nextLine());
+    }
+
+
+
 
     static void print(MoneyStorage storage) {
         System.out.println();
