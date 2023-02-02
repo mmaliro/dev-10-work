@@ -10,8 +10,17 @@ public class Exercise03 {
 
     public static void main(String[] args) {
         HashMap<String, Vehicle> vehicleMap = VehicleRepository.getMap();
+        printAll (vehicleMap);
 
         // 2. Print `vehicleMap` using your "print all" method.
     }
+
+    public static void printAll(HashMap<String, Vehicle> vehicleMap) {
+        for (Vehicle v : vehicleMap.values()) {
+            System.out.println(v.getMake());
+        }
+    }
+
+
 }
 

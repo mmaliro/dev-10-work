@@ -20,5 +20,13 @@ public class Exercise08 {
         System.out.println(p.getFullName());
         System.out.println(p.getDescription());
         System.out.println(p.getBalance());
+
+
+        p.setMoneyStorage(new Wallet(0.0, "My Wallet"));
+        System.out.println(p.getFullName());
+        System.out.println(p.getMoneyStorage());
+        System.out.println(p.getMoneyStorage());
     }
+
+
 }

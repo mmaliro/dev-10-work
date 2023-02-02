@@ -41,4 +41,14 @@ public class Mortgage implements MoneyStorage {
         // can't withdraw from a mortgage
         return 0;
     }
+
+    @Override
+    public void setMoneyStorage(Wallet myWallet) {
+
+    }
+
+    @Override
+    public MoneyStorage getMoneyStorage() {
+        return null;
+    }
 }

@@ -7,167 +7,188 @@ import learn.gomoku.players.HumanPlayer;
 import learn.gomoku.players.Player;
 import learn.gomoku.players.RandomPlayer;
 
-
-import java.util.Random;
+import java.util.List;
 import java.util.Scanner;
-
-import static learn.gomoku.game.Gomoku.WIDTH;
-
 
 public class GameController {
 
-    final Random random = new Random();
-    final Player[] players = new Player[2];
-
-
     private final Scanner console = new Scanner(System.in);
+    Gomoku game;
+    char[][] board = new char[15][15];
+
     public void run() {
+        //to be called from the main App
+        System.out.println("Welcome to Gomoku!");
+        System.out.println("===================");
 
-        System.out.println("Welcome to the Gomoku" + "\n" + "========================");
-        System.out.println("Player 1 is: " + "\n " + "1. Human" + "\n " + "2. Random Player");
-        System.out.println("Select [1-2]: ");
-        int p1 = Integer.parseInt(console.nextLine());
-        String choice1 = "", choice2 = "";
-        if (p1 == 1) {
-            System.out.println("Player 1, enter your name: ");
-            choice1 = console.nextLine();
-
-        } else if (p1 == 2) {
-            Player rand1 = new RandomPlayer();
-            choice1 = rand1.getName();
-            System.out.println(choice1);
-        } else {
-            System.out.println("Error. Please select 1 or 2.");
+        setup();
+        play();
+        if(playAgain()){
+            run();
         }
 
-        System.out.println("Player 2 is: " + "\n " + "1. Human" + "\n " + "2. Random Player");
-        System.out.println("Select [1-2]: ");
-        int p2 = Integer.parseInt(console.nextLine());
+    }
 
-        if (p2 == 1) {
-            System.out.println("Player 2, enter your name: ");
-            choice2 = console.nextLine();
+    private void setup(){
+        Player playerOne, playerTwo;
+        // ASK FOR human or random
+        playerOne = getPlayer(1);
+        playerTwo = getPlayer(2);
 
-        } else if (p2 == 2) {
-            Player rand2 = new RandomPlayer();
-            choice2 = rand2.getName();
-            System.out.println(choice2);
+        System.out.println("(Randomizing)");
+        game = new Gomoku(playerOne, playerTwo);
 
+        for(int x = 0; x < board.length; x++){
+            for(int y = 0; y < board[x].length; y++){
+                board[x][y] = '-';
+            }
         }
+        System.out.println(game.getCurrent().getName() + " goes first.");
+    }
 
-        Player playerOne = new HumanPlayer(choice1);
-        Player playerTwo = new HumanPlayer(choice2);
-
-
-        Gomoku game = new Gomoku(playerOne, playerTwo);
-
-
-        // TODO prompt the user for the player type;
-        System.out.println("\n(Randomizing)");
-        int randInt = random.nextInt(2);
-        if (randInt == 0) {
-            players[0] = playerOne;
-            players[1] = playerTwo;
-        } else {
-            players[0] = playerTwo;
-            players[1] = playerOne;
+    private Player getPlayer(int playerNumber){
+        Player human, random;
+        int choice;
+        String name;
+        System.out.println("Player " + playerNumber + " is:\n1. Human\n2. Random Player\nSelect [1-2]:");
+        choice = readInt("Error, please enter 1 or 2.", 1, 2);
+        if(choice == 1){
+            System.out.println("Player " + playerNumber + ", enter your name:");
+            name = readRequiredString("Error: Invalid Input. Please enter a name. (No Whitespace)");
+            human = new HumanPlayer(name);
+            return human;
+        }else{
+            random = new RandomPlayer();
+            return random;
         }
+    }
 
+    private void play(){
+        int row, column;
+        Stone stone;
+        Result result;
 
         do {
 
-
-            System.out.println(players[0].getName() + " goes first");
-
-            System.out.println("\n" + players[0].getName() + "'s turn.");
-            System.out.printf("\n" + "Enter a row #: ");
-            int row = Integer.parseInt(console.nextLine()) - 1;
-            System.out.printf("Enter a column #: ");
-            int column = Integer.parseInt(console.nextLine()) - 1;
-
-            displayBoard();
+            System.out.println("\n" + game.getCurrent().getName() + "'s Turn");
+            stone = game.getCurrent().generateMove(game.getStones());
 
 
-            Stone stone = new Stone(row, column, game.isBlacksTurn());
+            if (stone == null) {
+                System.out.println("Enter a row:");
+                row = readInt("Out of Bounds. Please enter an integer from 1 to 15", 1, 15) - 1;
+                System.out.println("Enter a column:");
+                column = readInt("Out of Bounds. Please enter an integer from 1 to 15", 1, 15) - 1;
 
-            Result result = game.place(stone);
-            if (result.isSuccess()) {
-                System.out.println("Error" + result.getMessage());
+                stone = new Stone(row, column, game.isBlacksTurn());
             }
 
-        } while (!game.isOver());
+            result = game.place(stone);
+            if(!result.isSuccess()){
+                System.out.println(result.getMessage());
+                continue;
+            }
 
-        System.out.println("Game is over? " + game.isOver());
-        System.out.println("The winner is " + game.getWinner().getName());
+            printBoard();
+        }while (!game.isOver()) ;
 
-
-
-
-
-        // Get a reference to the first player (i.e. the black player).
-        Player black = game.getCurrent();
-
-        // Black player's first move.
-        Result result = game.place(new Stone(0, 0, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        //  assertNull(result.getMessage());
-
-        // White player's first move.
-        result = game.place(new Stone(1, 0, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        // assertNull(result.getMessage());
-
-        // Black player's second move.
-        result = game.place(new Stone(0, 1, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        //assertNull(result.getMessage());
-
-        // White player's second move.
-        result = game.place(new Stone(1, 1, game.isBlacksTurn()));
-        // assertTrue(result.isSuccess());
-        // assertNull(result.getMessage());
-
-        // Black player's third move.
-        result = game.place(new Stone(0, 2, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        //assertNull(result.getMessage());
-
-        // White player's third move.
-        result = game.place(new Stone(1, 2, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        //assertNull(result.getMessage());
-
-        // Black player's fourth move.
-        result = game.place(new Stone(0, 3, game.isBlacksTurn()));
-        // assertTrue(result.isSuccess());
-        // assertNull(result.getMessage());
-
-        // White player's fourth move.
-        result = game.place(new Stone(1, 3, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        //assertNull(result.getMessage());
-
-        // Black player's fifth move... the winning move of the game.
-        // Not only should the result be successful, but it should contain the expected "winning" message.
-        result = game.place(new Stone(0, 4, game.isBlacksTurn()));
-        //assertTrue(result.isSuccess());
-        // assertEquals(String.format("%s wins.", black.getName()), result.getMessage());
-
-        // Check that the game is in fact over and that the winner was the black player.
-        //assertTrue(game.isOver());
-        // assertEquals(black, game.getWinner());
+        if(result.getMessage() != null){
+            System.out.println(result.getMessage());
+        }
     }
 
-    private void displayBoard() {
-        char[][] board = new char[WIDTH][WIDTH];
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < WIDTH; j++) {
-                System.out.print(board[i][j] + " ");
+    private void printBoard(){
+
+        System.out.print("  ");
+        List<Stone> list = game.getStones();
+
+        if(!game.isBlacksTurn()) {
+            board[(list.get(list.size() - 1).getRow())][(list.get(list.size() - 1).getColumn())] = 'X';
+            if(game.isOver()){
+                board[(list.get(list.size() - 1).getRow())][(list.get(list.size() - 1).getColumn())] = 'O';
+            }
+        }else{
+            board[(list.get(list.size() - 1).getRow())][(list.get(list.size() - 1).getColumn())] = 'O';
+            if(game.isOver()){
+                board[(list.get(list.size() - 1).getRow())][(list.get(list.size() - 1).getColumn())] = 'X';
+            }
+        }
+        for(int x = 1; x <= board.length; x++) {
+            if (x < 10) {
+                System.out.print("0" + x + " ");
+            }else{
+                System.out.print(x + " ");
+            }
+        }
+        System.out.println();
+
+        for(int x = 0; x < board.length; x++){
+            if(x < 9) {
+                System.out.print("0" + (x + 1));
+            }else{
+                System.out.print(x+1);
+            }
+            for(int y = 0; y < board[x].length; y++){
+                System.out.print(" " + board[x][y] + " ");
             }
             System.out.println();
         }
     }
 
 
-}
+    private String readRequiredString(String message){
+        String input;
+        input = console.nextLine();
+        boolean isWhitespace = false;
 
+        for (char c : input.toCharArray()) {
+            if (Character.isWhitespace(c)) {
+                isWhitespace = true;
+            }
+        }
+
+        while(isWhitespace || input.equals("") || input == null) {
+            if (isWhitespace || input.equals("") || input == null) {
+                System.out.println(message);
+                input = console.nextLine();
+            }
+        }
+
+        return input;
+    }
+
+
+    private int readInt(String message, int min, int max){
+        String stringInput;
+        int intInput = -1;
+        boolean isNumber;
+        while(true) {
+            stringInput = readRequiredString("Error: Invalid Input. Try again.");
+            try {
+                intInput = Integer.parseInt(stringInput);
+            } catch (NumberFormatException nfe) {
+                System.out.println(message);
+            }
+
+            if (!(intInput >= min && intInput <= max)) {
+                System.out.println(message);
+            } else {
+                return intInput;
+            }
+        }
+    }
+
+
+    private boolean playAgain(){
+        String response;
+        System.out.print("Play Again?[y/n]: ");
+        response = readRequiredString("Please enter \"y\" or \"n\".");
+        if(response.equalsIgnoreCase("y")){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+
+}

@@ -11,7 +11,12 @@ public class Game {
     private final Scanner console = new Scanner(System.in);
     private Hero hero;
     private Treasure treasure;
+
+
     private boolean isOver;
+
+    public Game() {
+    }
 
     public void run() {
         setUp();
@@ -26,19 +31,48 @@ public class Game {
         System.out.print("What is the name of your hero?: ");
         String name = console.nextLine();
 
+        System.out.println("What symbol would you like for your hero?");
+        String symbol = console.nextLine();
         Random rand = new Random();
         int x = rand.nextInt(WIDTH);
         int y = rand.nextInt(WIDTH);
 
-        hero = new Hero(name, x, y);
+        hero = new Hero(name, symbol.charAt(0), x, y);
+        System.out.println("How many treasures do you want on the map?: ");
+        int numberOfTreasures = Integer.parseInt(console.nextLine());
 
-        do {
-            x = rand.nextInt(WIDTH);
-            y = rand.nextInt(WIDTH);
-        } while (x == hero.getX() && y == hero.getY());
+        treasures = new Treasure[numberOfTreasures];
+        for (int treasureIndex = 0; treasureIndex < numberOfTreasures; treasureIndex++) {
+            do {
+                x = rand.nextInt(WIDTH);
+                y = rand.nextInt(WIDTH);
+            } while (x == hero.getX() && y == hero.getY() || checkForTreasure(x, y));
 
-        treasure = new Treasure(x, y);
+            treasure = new Treasure(x, y);
+            Treasure treasure = new Treasure(x, y);
+
+            treasures[treasureIndex = treasure;]
+        }
+
+
     }
+
+    private boolean checkForTreasure(int x, int y) {
+        return getTreasureAtLocation(x,y) != null;
+    }
+
+    private Treasure getTreasureAtLocation(int x, int y) {
+        Treasure foundTreasure = null;
+
+        for (Treasure treasure : treasures) {
+            if (treasure != null && treasure.getX() == x && treasure.getY() == y) {
+                foundTreasure = treasure;
+                break;
+            }
+        }
+        return foundTreasure;
+    }
+
 
     private void printWorld() {
         // top wall border
@@ -52,6 +86,7 @@ public class Game {
                     System.out.print(hero.getSymbol());
                 } else if (row == treasure.getY() && col == treasure.getX()) {
                     System.out.print("T");
+                    else if (row == treasure2.getY() && col)
                 } else {
                     System.out.print(EMPTY_CHARACTER);
                 }
