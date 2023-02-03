@@ -1,6 +1,6 @@
 # Exercise04
 
-(Hint: You are not required to make the `Rank` enum stateful, but it may make some tasks easier. 
+(Hint: You are not required to make the `learn.cards.Rank` enum stateful, but it may make some tasks easier. 
 For example, track a numeric value for a rank to help decide which rank is bigger.)
 
 Two-card Poker is a Poker variant with simplified rules. A hand consists of two cards. See `learn.poker.TwoCardHand`.
