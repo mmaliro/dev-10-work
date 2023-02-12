@@ -1,0 +1,14 @@
+2,Treeline,1,2,2023,mono_Si,true
+5,Treeline,1,4,2020,CdTe,true
+6,Treeline,1,5,2023,A_Si,false
+7,Treeline,1,6,2021,mono_Si,false
+8,Treeline,1,7,2022,CdTe,false
+9,Treeline,1,9,2022,CdTe,true
+10,Treeline,1,18,2020,CIGS,true
+11,Treeline,1,13,2012,CdTe,true
+12,Treehouse,1,1,2021,mono_Si,true
+14,Test,2,2,2020,multi_Si,false
+15,Test,7,7,2020,CIGS,false
+16,Test,4,4,2020,multi_Si,false
+17,Test,6,6,2020,CdTe,true
+18,Test2,250,250,2023,CdTe,false
