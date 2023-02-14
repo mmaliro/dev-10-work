@@ -7,7 +7,5 @@ public enum Material {
     CdTe,
     CIGS;
 
-    public boolean isEmpty() {
-        return false;
-    }
+
 }

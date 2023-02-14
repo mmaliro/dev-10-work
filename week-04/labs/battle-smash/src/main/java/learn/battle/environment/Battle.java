@@ -114,10 +114,11 @@ public class Battle {
                 attacked = current.get(random.nextInt(current.size()));
             } while (attacker == attacked);
 
+
             int balanceDrain = random.nextInt(10) + 5;
             attacked.reduceBalance(balanceDrain);
             announcer.announce(String.format(
-                    "%s attacks %s and drains %s balance.",
+                    "%s attacks %s using %s and drains %s balance.",
                     attacker.getName(),
                     attacked.getName(),
                     balanceDrain

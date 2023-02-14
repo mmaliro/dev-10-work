@@ -25,32 +25,70 @@ public class View {
     }
 
     public void printHeader(String message) {
+        printMessage(message);
+        System.out.println("=".repeat(message.length()));
+    }
+
+    private void printMessage(String message) {
         System.out.println();
         System.out.println(message);
-        System.out.println("=".repeat(message.length()));
     }
 
     public void printAllEncounters(List<Encounter> encounters) {
         printHeader(MenuOption.DISPLAY_ALL.getMessage());
+        printEncounters(encounters);
+    }
+
+    public void printEncountersByType(List<Encounter> encounters, EncounterType encounterType) {
+        printHeader(MenuOption.DISPLAY_BY_TYPE.getMessage() + ": " + encounterType);
+        printEncounters(encounters);
+
+    }
+
+    public Encounter selectEncounter(List<Encounter> encounters) {
+        printEncounters(encounters);
+        int encounterId = readInt("Enter an encounter Id: ");
+
+        Encounter selectedEncounter = null;
+
+        for(Encounter encounter : encounters) {
+            if (encounter.getEncounterId() == encounterId) {
+                selectedEncounter = encounter;
+                break;
+            }
+        }
+
+        if (selectedEncounter == null) {
+            printMessage("Encounter not found.");
+        }
+
+        return selectedEncounter;
+    }
+
+    public static void printEncounters(List<Encounter> encounters) {
         if (encounters == null || encounters.size() == 0) {
             System.out.println();
             System.out.println("No encounters found.");
         } else {
             for (Encounter e : encounters) {
-                System.out.printf("%s. Type:%s, Occurrences:%s, When:%s, Desc:%s%n",
-                        e.getEncounterId(),
-                        e.getType(),
-                        e.getOccurrences(),
-                        e.getWhen(),
-                        e.getDescription());
+                printEncounter(e);
             }
         }
     }
 
-    public void printResult(EncounterResult result) {
+    public static void printEncounter(Encounter encounter) {
+        System.out.printf("%s. Type:%s, Occurrences:%s, When:%s, Desc:%s%n",
+                encounter.getEncounterId(),
+                encounter.getType(),
+                encounter.getOccurrences(),
+                encounter.getWhen(),
+                encounter.getDescription());
+    }
+
+    public void printResult(EncounterResult result, String successMessageTemplate) {
         if (result.isSuccess()) {
             if (result.getPayload() != null) {
-                System.out.printf("Encounter Id %s added.%n", result.getPayload().getEncounterId());
+                System.out.printf(successMessageTemplate, result.getPayload().getEncounterId());
             }
         } else {
             printHeader("Errors");
@@ -63,6 +101,19 @@ public class View {
     public Encounter makeEncounter() {
         printHeader(MenuOption.ADD.getMessage());
         Encounter encounter = new Encounter();
+        encounter.setType(readType());
+        encounter.setOccurrences(readInt("Number of occurrences:"));
+        encounter.setWhen(readRequiredString("When:"));
+        encounter.setDescription(readRequiredString("Description:"));
+        return encounter;
+    }
+
+    public Encounter updateEncounter(Encounter encounter) {
+        System.out.println();
+        printEncounter(encounter);
+        System.out.println();
+
+
         encounter.setType(readType());
         encounter.setOccurrences(readInt("Number of occurrences:"));
         encounter.setWhen(readRequiredString("When:"));
@@ -114,7 +165,7 @@ public class View {
         return result;
     }
 
-    private EncounterType readType() {
+    public EncounterType readType() {
         int index = 1;
         for (EncounterType type : EncounterType.values()) {
             System.out.printf("%s. %s%n", index++, type);

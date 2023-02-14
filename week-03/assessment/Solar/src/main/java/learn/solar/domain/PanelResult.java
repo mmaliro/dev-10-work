@@ -5,20 +5,17 @@ import java.util.List;
 
 public class PanelResult {
 
-    private ArrayList<String> messages;
+    private ArrayList<String> messages = new ArrayList<>();
 
     private Panel panel;
 
-    public PanelResult() {
-        messages = new ArrayList<>();
-    }
 
     public boolean isSuccess() {
-        return messages.isEmpty();
+        return messages.size() == 0;
     }
 
     public List<String> getMessages() {
-        return messages;
+        return new ArrayList<>(messages);
     }
 
     public Panel getPanel() {
@@ -32,5 +29,6 @@ public class PanelResult {
     public void addMessage(String strPanel) {
         messages.add(strPanel);
     }
+
 }
 

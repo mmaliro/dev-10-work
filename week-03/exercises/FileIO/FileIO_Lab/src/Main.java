@@ -101,7 +101,10 @@ public class Main {
             try {
                 copy(Path.of("another.data"), Path.of("./destination/new-elements-file.txt"));
                 break;
-            } catch
+            } catch (IOException ex) {
+                ex.printStackTrace();
+
+            }
         }
 
         while (true) {

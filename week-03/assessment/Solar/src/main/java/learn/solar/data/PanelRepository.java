@@ -9,11 +9,12 @@ public interface PanelRepository {
 
     List<Panel> findAll() throws DataException;
 
+
     Panel add(Panel panel) throws DataException;
 
     boolean update(Panel panel) throws DataException;
 
     boolean deleteById(int id) throws DataException;
 
-    List<Panel> findBySection() throws DataException;
+
 }

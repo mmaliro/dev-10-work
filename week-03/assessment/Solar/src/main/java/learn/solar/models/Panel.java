@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.Objects;
 
 public class Panel {
-    private int id;
+    private int panelId;
     private String section;
     private int row;
     private int column;
@@ -12,8 +12,8 @@ public class Panel {
     private Material material;
     private boolean isTracking;
 
-    public Panel(String section, int row, int column, int yearInstalled, Material material) {
-        this.id = id;
+    public Panel(int panelId, String section, int row, int column, int installationYear, Material material, boolean isTracking) {
+        this.panelId = panelId;
         this.section = section;
         this.row = row;
         this.column = column;
@@ -22,12 +22,16 @@ public class Panel {
         this.isTracking = isTracking;
     }
 
-    public int getId() {
-        return id;
+    public Panel() {
+
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getPanelId() {
+        return panelId;
+    }
+
+    public void setPanelId(int panelId) {
+        this.panelId = panelId;
     }
 
     public String getSection() {
@@ -36,9 +40,7 @@ public class Panel {
     }
 
     public void setSection(String section) {
-        if (section == null || section.trim().isEmpty()) {
-            throw new IllegalArgumentException("Section is required and cannot be blank.");
-        }
+
         this.section = section;
     }
 
@@ -47,9 +49,6 @@ public class Panel {
     }
 
     public void setRow(int row) {
-        if (row <= 0 || row > 250) {
-            throw new IllegalArgumentException("Row must be a positive number less than or equal to 250.");
-        }
         this.row = row;
     }
 
@@ -59,9 +58,6 @@ public class Panel {
     }
 
     public void setColumn(int column) {
-        if (column <= 0 || column > 250) {
-            throw new IllegalArgumentException("Column must be a positive number less than or equal to 250.");
-        }
         this.column = column;
     }
 
@@ -70,10 +66,6 @@ public class Panel {
     }
 
     public void setInstallationYear(int installationYear) {
-        Calendar calendar = Calendar.getInstance();
-        if (installationYear >= calendar.get(Calendar.YEAR)) {
-            throw new IllegalArgumentException("Year Installed must be in the past.");
-        }
         this.installationYear = installationYear;
     }
 
@@ -82,9 +74,6 @@ public class Panel {
     }
 
     public void setMaterial(Material material) {
-        if (material == null || material.isEmpty() || !(material.equals("Multicrystalline Silicon") || material.equals("Monocrystalline Silicon") || material.equals("Amorphous Silicon") || material.equals("Cadmium Telluride") || material.equals("Copper Indium Gallium Selenide"))) {
-            throw new IllegalArgumentException("Material is required and can only be one of the five materials listed.");
-        }
             this.material = material;
         }
 
@@ -105,7 +94,7 @@ public class Panel {
 
         Panel panel = (Panel) o;
 
-        if (id != panel.id) return false;
+        if (panelId != panel.panelId) return false;
         if (row != panel.row) return false;
         if (column != panel.column) return false;
         if (installationYear != panel.installationYear) return false;
@@ -116,7 +105,7 @@ public class Panel {
 
     @Override
     public int hashCode() {
-        int result = id;
+        int result = panelId;
         result = 31 * result + (section != null ? section.hashCode() : 0);
         result = 31 * result + row;
         result = 31 * result + column;
@@ -125,4 +114,6 @@ public class Panel {
         result = 31 * result + (isTracking ? 1 : 0);
         return result;
     }
+
+
 }

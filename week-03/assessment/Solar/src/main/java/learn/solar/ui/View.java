@@ -9,68 +9,163 @@ public class View {
     private Scanner console;
 
     public int chooseOptionFromMenu() {
-        System.out.println("Please choose an option:");
+        System.out.println("Menu");
         System.out.println("1. View panels by section");
         System.out.println("2. Add panel");
         System.out.println("3. Update panel");
         System.out.println("4. Delete panel");
         System.out.println("5. Exit");
+        System.out.println("Select [1-5]");
         int choice = console.nextInt();
         return choice;
     }
 
     public void printHeader(String header) {
         System.out.println(header);
+        System.out.println("=".repeat(header.length()));
     }
 
-    public void printResult(PanelResult result) {
-        System.out.println(result.getMessages());
+    public void printResult(PanelResult result, String successTemplate) {
+        if (result.isSuccess()) {
+            if (result.getPanel() != null) {
+                System.out.printf(successTemplate, result.getPanel());
+            }
+        } else {
+            printHeader("Errors");
+            for (String msg : result.getMessages()) {
+                System.out.printf("- %s%n", msg);
+            }
+        }
     }
 
     public void printPanels(String sectionName, List<Panel> panels) {
-        System.out.println("Panels in section " + sectionName + ":");
-        for (Panel panel : panels) {
-            System.out.println(panel);
+            System.out.println("Section name: " + sectionName);
+            for (int i = 0; i < panels.size(); i++) {
+                System.out.println("Panel " + (i + 1) + ": " + panels.get(i).toString());
+            }
         }
-    }
+
+
 
     public Panel choosePanel(String sectionName, List<Panel> panels) {
-        System.out.println("Please choose a panel:");
-        int i = 1;
-        for (Panel panel : panels) {
-            System.out.println(i + ". " + panel);
-            i++;
+        System.out.println("Section name: " + sectionName);
+        for (int i = 0; i < panels.size(); i++) {
+            System.out.println((i + 1) + ". " + panels.get(i).toString());
         }
-        int choice = console.nextInt();
+        System.out.print("Choose a panel (1-" + panels.size() + "): ");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
         return panels.get(choice - 1);
     }
 
     public Panel makePanel() {
-        System.out.println("Enter panel information:");
-        String section = readRequiredString("Section:");
-        int row = readInt("Row:", 1, 250);
-        int column = readInt("Column:", 1, 250);
-        int year = readInt("Installation year:", 1000, 9999);
-        Material material = readMaterial();
-        Panel panel = new Panel(section, row, column, year, material);
+        Panel panel = new Panel;
+        panel.setSection(readRequiredString("Section:"));
+        panel.setRow(readInt("Row: "));
+        panel.setColumn(readInt("Column: "));
+        panel.setInstallationYear(readInt("Installation year: "));
+        panel.setMaterial(readRequiredString("Material: "));
+        panel.setTracking(readRequiredString("Track (y/n): "));
         return panel;
     }
 
     public Panel update(Panel panel) {
-        System.out.println("Enter updated panel information:");
-        String section = readString("Section (enter to keep current value of " + panel.getSection() + "):");
-        if (!section.isEmpty()) {
-            panel.setSection(section);
+        System.out.println();
+        printPanels(panel);
+        System.out.println();
+
+        panel.setSection(readRequiredString("Section:"));
+        panel.setRow(readInt("Row: "));
+        panel.setColumn(readInt("Column: "));
+        panel.setInstallationYear(readInt("Installation year: "));
+        panel.setMaterial(readRequiredString("Material: "));
+        panel.setTracking(readRequiredString("Track (y/n): "));
+
+        return panel;
         }
-        int row = readInt("Row (enter 0 to keep current value of " + panel.getRow() + "):", 0, 250);
-        if (row != 0) {
-            panel.setRow(row);
+
+
+
+
+    public String readSection() {
+        System.out.print("Enter the section name: ");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
+
+    private String readString(String message) {
+        System.out.print(message);
+        return console.nextLine();
+    }
+
+    private String readRequiredString(String read) {
+        String result;
+        do {
+            result = readString(read);
+            if (result.trim().length() == 0) {
+                System.out.println("Value is required.");
+            }
+        } while (result.trim().length() == 0);
+        return result;
+    }
+
+    private int readInt(String read, int min, int max) {
+        int result;
+        do {
+            result = readInt(read);
+            if (result < min || result > max) {
+                System.out.printf("Value must be between %s and %s.%n", min, max);
+            }
+        } while (result < min || result > max);
+        return result;
+    }
+
+    private Material readMaterial() {
+        System.out.println("Materials:");
+        System.out.println("1. multi_Si");
+        System.out.println("2. mono_Si");
+        System.out.println("3. A_Si");
+        System.out.println("4. CdTe");
+        System.out.println("5. CIGS");
+        System.out.print("Choose a material (1-5): ");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        switch (choice) {
+            case 1: return Material.multi_Si;
+            case 2: return Material.mono_Si;
+            case 3: return Material.A_Si;
+            case 4: return Material.CdTe;
+            case 5: return Material.CIGS;
+            default: return Material.multi_Si;
         }
-        int column = readInt("Column (enter 0 to keep current value of " + panel.getColumn() + "):", 0, 250);
-        if (column != 0) {
-            panel.setColumn(column);
-        }
-        int year = readInt("Installation year (enter 0 to keep current value of " + panel.getYear() + "):", 0, 9999);
-        if (year != 0) {
-            panel.setYear(year);
+    }
+
+
+
+
+
+
+
+
+    public String viewSection() {
+    }
+
+    public Panel addPanel() {
+    }
+
+    public void displayAddPanelResult(PanelResult result, String s) {
+    }
+
+    public void displayPanels(List<Panel> panels) {
+    }
+
+    public Panel updatePanel(List<Panel> panels) {
+    }
+
+    public Panel selectPanel(List<Panel> panels) {
+    }
+}
+
+
 

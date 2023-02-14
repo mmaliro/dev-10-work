@@ -9,4 +9,12 @@
     A bean definition registers an instance of a data type with the DI container.
     -->
 
+    <bean id = "Fighter 1" class="learn.battle.fighters.Fighter">
+
+        <property name = "announcer" ref="announcer"/>
+
+
+
+    </bean>
+
 </beans>
