@@ -252,7 +252,7 @@ order by c.name;
 -- for customers in the 'L3K' postal_code.
 -- Expected: 39 Rows
 
-SELECT 
+select
     c.customer_id, 
     c.first_name, 
     c.last_name, 
@@ -261,13 +261,13 @@ SELECT
     i.name item_name, 
     cat.name category_name, 
     u.name unit_name
-FROM customer c
-INNER JOIN project p ON c.customer_id = p.customer_id
-INNER JOIN project_item pi ON p.project_id = pi.project_id
-INNER JOIN item i ON pi.item_id = i.item_id
-INNER JOIN category cat ON i.category_id = cat.category_id
-INNER JOIN unit u ON i.unit_id = u.unit_id
-WHERE c.postal_code = 'L3K'
+from customer c
+inner join project p on c.customer_id = p.customer_id
+inner join project_item pi on p.project_id = pi.project_id
+inner join item i on pi.item_id = i.item_id
+inner join category cat on i.category_id = cat.category_id
+inner join unit u on i.unit_id = u.unit_id
+where c.postal_code = 'L3K'
 
 
 -- STRETCH GOAL
