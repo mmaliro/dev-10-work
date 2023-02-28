@@ -34,9 +34,9 @@ create table theater_show (
 
 create table ticket (
 	ticket_id int primary key auto_increment,
-    seat varchar(2) not null,
+    seat varchar(2) not null unique,
     customer_id int not null,
-    show_id int not null,
+    show_id int not null unique,
 	constraint fk_ticket_customer_id
 		foreign key (customer_id)
 		references customer(customer_id),
