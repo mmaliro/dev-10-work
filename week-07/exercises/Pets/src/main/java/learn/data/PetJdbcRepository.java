@@ -1,2 +1,4 @@
-package learn.data;public class PetJdbcRepository {
+package learn.data;
+
+public class PetJdbcRepository {
 }
