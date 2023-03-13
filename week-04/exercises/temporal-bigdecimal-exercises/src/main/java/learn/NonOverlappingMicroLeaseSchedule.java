@@ -1,5 +1,6 @@
 package learn;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,38 @@ public class NonOverlappingMicroLeaseSchedule {
      * false if not valid
      */
     public boolean add(MicroLease lease) {
-        return false;
+
+        if (lease == null ) {
+            return false;
+        }
+        if (lease.getStart() == null || lease.getEnd() == null) {
+            return false;
+        }
+        if (lease.getStart().isAfter(lease.getEnd())) {
+            return false;
+        }
+
+        LocalDateTime startLease = lease.getStart();
+        LocalDateTime endLease = lease.getEnd();
+
+        for (MicroLease ml : leases) {
+            LocalDateTime startExisting = ml.getStart();
+            LocalDateTime endExisting = ml.getEnd();
+
+            if (startLease.isEqual(startExisting)) {
+                return false;
+            }
+
+            if (startLease.isBefore(startExisting) && endLease.isAfter(startExisting)) {
+                return false;
+            }
+
+            if (startLease.isAfter(startExisting) && startLease.isBefore(endExisting)) {
+                return false;
+            }
+        }
+
+        leases.add(lease);
+        return true;
     }
 }
