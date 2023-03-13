@@ -24,8 +24,8 @@ function populateGrid(agents) {
         <div class="col">${agent.dob}</div>
         <div class="col">${agent.heightInInches}</div>
         <div class="col-3">
-            <button type="button" class="btn btn-danger" onclick="deletePanel(${agent.agentId})">Delete</button>
-            <button type="button" class="btn btn-info" onclick="editPanel(${agent.agentId})">Edit</button>
+            <button type="button" class="btn btn-danger" onclick="deleteAgent(${agent.agentId})">Delete</button>
+            <button type="button" class="btn btn-info" onclick="editAgent(${agent.agentId})">Edit</button>
         </div>
         </div>`;
     }
