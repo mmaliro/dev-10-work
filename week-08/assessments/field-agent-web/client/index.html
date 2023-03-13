@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <title>Field Agents</title>
+    </head>
+    <body>
+        <main class="container">
+            <div class="row mb-3">
+                <h1 class="col">Field Agents</h1>
+                <div class="col align-self-end">
+                    <button class="btn btn-primary" id="btnAdd">Add an Agent</button>
+                </div>
+            </div>
+    
+            <div id="grid"></div>
+    
+            <form class="d-none mb-5">
+                <div>
+                    <label class="form-label" for="agentId">ID</label>
+                    <input type="number" class="form-control" id="agentId" required>
+                </div>
+                <div>
+                    <label class="form-label" for="firstName">First Name</label>
+                    <input type="text" class="form-control" id="firstName" required>
+                </div>
+                <div>
+                    <label class="form-label" for="middleName">Middle Initial</label>
+                    <input type="text" class="form-control" id="middleName" required>
+                </div>
+                <div>
+                    <label class="form-label" for="lastName">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" required>
+                </div>
+                <div>
+                    <label class="form-label" for="dob">DOB</label>
+                    <input type="date" class="form-control" id="dob" required>
+                </div>
+                <div>
+                    <label class="form-label" for="heightInInches">Heigh In Inchest</label>
+                    <input type="number" class="form-control" id="heightInInches" required>
+                </div>
+                
+                
+                <div>
+                    <button class="btn btn-warning cancel" type="button">Cancel</button>
+                    <button class="btn btn-primary" type="submit">Save</button>
+                </div>
+            </form>
+    
+            <div id="confirmDelete" class="mt-2 d-none">
+                <div class="alert alert-danger">
+                    Are you sure you want to delete agent <span id="agentKey">Agent Key</span>?
+                </div>
+                <div>
+                    <button id="btnDelete" class="btn btn-danger" type="button">Delete</button>
+                    <button class="btn btn-warning cancel" type="button">Cancel</button>
+                </div>
+            </div>
+    
+            <div id="errorMessage" class="alert alert-danger mt-3 d-none">
+    
+            </div>
+        </main>
+        <script src="index.js"></script>
+    </body>
+    
+    </html>
